@@ -14,7 +14,7 @@ def weather_view(request):
     weather_data = []
 
     for city in cities:
-        url = f'http://api.openweathermap.org/data/2.5/weather?q={city.name}&APPID=12af49092071ab4a79f4f25888f8c68a'
+        url = f'http://api.openweathermap.org/data/2.5/weather?q={city.name}&units=metric&APPID=12af49092071ab4a79f4f25888f8c68a'
         response = requests.get(url)
 
         if response.status_code == 200:
