@@ -4,6 +4,7 @@ from django.shortcuts import render
 from dotenv import load_dotenv
 from .models import City
 from .forms import CityForm
+from django.contrib import messages
 
 load_dotenv()
 
@@ -41,6 +42,8 @@ def weather_view(request):
                     'form': form,
                 }
                 return render(request, 'nasa-mars/nasa-mars.html', context)
+            else:
+                messages.error(request, 'Город не найден')
 
     # Получаем погоду для всех городов из базы
     for city in cities:
