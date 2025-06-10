@@ -5,7 +5,7 @@ from dotenv import load_dotenv
 from .models import City
 from .forms import CityForm
 from django.contrib import messages
-
+import datetime
 load_dotenv()
 
 
@@ -30,10 +30,11 @@ def weather_view(request):
 
                 # Добавляем данные о погоде
                 weather = {
-                    'city': city_name,
+                    'city': data['name'],
                     'temperature': data['main']['temp'],
                     'description': data['weather'][0]['description'],
                     'icon': data['weather'][0]['icon'],
+                    'local_time': datetime.datetime.utcfromtimestamp(data['dt'] + data['timezone']).strftime("%H:%M, %d %B %Y")
                 }
                 weather_data.append(weather)
 
@@ -53,10 +54,12 @@ def weather_view(request):
         if response.status_code == 200:
             data = response.json()
             weather = {
-                'city': city.name,
+                'city': data['name'],
                 'temperature': data['main']['temp'],
                 'description': data['weather'][0]['description'],
                 'icon': data['weather'][0]['icon'],
+                'local_time': datetime.datetime.utcfromtimestamp(data['dt'] + data['timezone']).strftime(
+                    "%H:%M, %d %B %Y")
             }
             weather_data.append(weather)
 
