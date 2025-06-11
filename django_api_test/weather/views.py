@@ -42,7 +42,7 @@ def weather_view(request):
                     'weather_data': weather_data,
                     'form': form,
                 }
-                return render(request, 'nasa-mars/nasa-mars.html', context)
+                return render(request, 'weather/weather.html', context)
             else:
                 messages.error(request, 'Город не найден')
 
@@ -70,4 +70,4 @@ def weather_view(request):
         'weather_data': weather_data,
         'form': form,
     }
-    return render(request, 'nasa-mars/nasa-mars.html', context)
+    return render(request, 'weather/weather.html', context)
