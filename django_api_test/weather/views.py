@@ -1,6 +1,6 @@
 import os
 import requests
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from dotenv import load_dotenv
 from .models import City
 from .forms import CityForm
@@ -11,6 +11,29 @@ load_dotenv()
 
 def weather_view(request):
     # Получаем все города из базы данных
+    if request.method == 'POST' and 'add_city' in request.POST:
+        form = CityForm(request.POST)
+        if form.is_valid():
+            city_name = form.cleaned_data['name']
+
+            # Проверяем, существует ли город в базе
+            if City.objects.filter(name__iexact=city_name).exists():
+                messages.warning(request, f'Город {city_name} уже есть в списке')
+                return redirect('weather')
+            else:
+                # Проверяем через API, что город существует
+                url = f'http://api.openweathermap.org/data/2.5/weather?q={city_name}&units=metric&APPID=12af49092071ab4a79f4f25888f8c68a'
+                response = requests.get(url)
+
+                if response.status_code == 200:
+                    # Сохраняем город в базу
+                    form.save()
+                    messages.success(request, f'Город {city_name} успешно добавлен')
+                    return redirect('weather')
+                else:
+                    messages.error(request, 'Город не найден')
+                    return redirect('weather')
+
     cities = City.objects.all()
     weather_data = []
 
