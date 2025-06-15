@@ -17,10 +17,10 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from django_api_test.nasa_mars.views import nasa_view
-from django_api_test.weather.views import weather_view
+from django_api_test.weather.views import WeatherView
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', weather_view, name='weather'),
+    path('', WeatherView.as_view(), name='weather'),
     path('nasa/', nasa_view, name='nasa'),
 ]
