@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'django_api_test.nasa_mars',
     'django_api_test.weather',
     'django_api_test.user',
+    'django_api_test.tel_parser',
 ]
 
 MIDDLEWARE = [

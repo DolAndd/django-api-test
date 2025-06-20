@@ -18,9 +18,11 @@ from django.contrib import admin
 from django.urls import path
 from django_api_test.nasa_mars.views import nasa_view
 from django_api_test.weather.views import WeatherView
+from django_api_test.tel_parser.views import TelegramParserView
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', WeatherView.as_view(), name='weather'),
     path('nasa/', nasa_view, name='nasa'),
+    path('tel_parser/', TelegramParserView.as_view(), name='tel_parser'),
 ]

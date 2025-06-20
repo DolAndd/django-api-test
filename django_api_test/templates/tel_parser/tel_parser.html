@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Telegram Channel Parser</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container mt-5">
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-header bg-primary text-white">
+                        <h4 class="mb-0">Парсер Telegram каналов</h4>
+                    </div>
+                    <div class="card-body">
+                        <form method="POST">
+                            {% csrf_token %}
+
+                            {% if form.non_field_errors %}
+                                <div class="alert alert-danger">
+                                    {{ form.non_field_errors }}
+                                </div>
+                            {% endif %}
+
+                            <div class="mb-3">
+                                <label for="{{ form.api_id.id_for_label }}" class="form-label">{{ form.api_id.label }}</label>
+                                {{ form.api_id }}
+                                {% if form.api_id.errors %}
+                                    <div class="invalid-feedback d-block">
+                                        {{ form.api_id.errors }}
+                                    </div>
+                                {% endif %}
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="{{ form.api_hash.id_for_label }}" class="form-label">{{ form.api_hash.label }}</label>
+                                {{ form.api_hash }}
+                                {% if form.api_hash.errors %}
+                                    <div class="invalid-feedback d-block">
+                                        {{ form.api_hash.errors }}
+                                    </div>
+                                {% endif %}
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="{{ form.channel_name.id_for_label }}" class="form-label">{{ form.channel_name.label }}</label>
+                                {{ form.channel_name }}
+                                {% if form.channel_name.errors %}
+                                    <div class="invalid-feedback d-block">
+                                        {{ form.channel_name.errors }}
+                                    </div>
+                                {% endif %}
+                            </div>
+
+                            <button type="submit" class="btn btn-primary w-100">Получить данные</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
