@@ -3,3 +3,6 @@ dev:
 
 migrate:
 	uv run python3 manage.py migrate
+
+install:
+	@uv sync
