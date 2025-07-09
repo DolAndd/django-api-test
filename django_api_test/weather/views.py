@@ -22,7 +22,7 @@ class WeatherView(View):
 
             # Создаем timezone-aware datetime объект
             timestamp = data['dt'] + data['timezone']
-            utc_time = datetime.datetime.fromtimestamp(timestamp, datetime.UTC)
+            utc_time = datetime.datetime.fromtimestamp(timestamp, datetime.timezone.utc)
 
             return {
                 'city_id': city_id,
